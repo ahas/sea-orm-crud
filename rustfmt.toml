@@ -1,0 +1,19 @@
+edition = "2021"
+max_width = 108
+
+newline_style = "Auto"
+tab_spaces = 2
+reorder_modules = true
+reorder_imports = true
+
+use_field_init_shorthand = true
+use_try_shorthand = true
+
+fn_call_width = 108
+attr_fn_like_width = 108
+struct_lit_width = 18
+struct_variant_width = 36
+array_width = 108
+chain_width = 108
+single_line_if_else_max_width = 80
+single_line_let_else_max_width = 80
