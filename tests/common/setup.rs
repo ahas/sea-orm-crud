@@ -1,7 +1,7 @@
 use sea_orm::sea_query::{Table, TableCreateStatement};
 use sea_orm::{
-  ConnectOptions, ConnectionTrait, Database, DatabaseBackend, DatabaseConnection, DbBackend, DbConn, DbErr,
-  EntityTrait, ExecResult, Schema, Statement,
+  ConnectOptions, ConnectionTrait, Database, DatabaseConnection, DbBackend, DbConn, DbErr, EntityTrait,
+  ExecResult, Schema,
 };
 
 pub async fn setup(base_url: &str, _db_name: &str) -> DatabaseConnection {

@@ -5,7 +5,7 @@ use sea_orm::{
 };
 use serde::{Deserialize, Deserializer, Serialize};
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Optional<T>(pub Option<T>);
 
 impl<T> Optional<T> {

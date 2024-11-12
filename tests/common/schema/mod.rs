@@ -4,10 +4,13 @@ pub mod users;
 
 use sea_orm::prelude::Expr;
 use sea_orm::sea_query::{ColumnDef, ForeignKey, Table};
-use sea_orm::{ConnectionTrait, DatabaseConnection, DbErr, ForeignKeyAction};
+use sea_orm::{ConnectionTrait, DbErr, ForeignKeyAction};
 
-pub async fn create_tables(db: &DatabaseConnection) -> Result<(), DbErr> {
-  let builder = db.get_database_backend();
+use super::TestContext;
+
+pub async fn create_tables(ctx: &TestContext) -> Result<(), DbErr> {
+  let db_conn = &ctx.db_conn;
+  let builder = db_conn.get_database_backend();
 
   let stmt = Table::create()
     .table(users::Entity)
@@ -19,7 +22,7 @@ pub async fn create_tables(db: &DatabaseConnection) -> Result<(), DbErr> {
     .col(ColumnDef::new(users::Column::UpdatedAt).timestamp().default(Expr::current_timestamp()).not_null())
     .to_owned();
 
-  db.execute(builder.build(&stmt)).await?;
+  db_conn.execute(builder.build(&stmt)).await?;
 
   let stmt = Table::create()
     .table(posts::Entity)
@@ -40,7 +43,7 @@ pub async fn create_tables(db: &DatabaseConnection) -> Result<(), DbErr> {
     )
     .to_owned();
 
-  db.execute(builder.build(&stmt)).await?;
+  db_conn.execute(builder.build(&stmt)).await?;
 
   let stmt = Table::create()
     .table(comments::Entity)
@@ -68,7 +71,7 @@ pub async fn create_tables(db: &DatabaseConnection) -> Result<(), DbErr> {
     )
     .to_owned();
 
-  db.execute(builder.build(&stmt)).await?;
+  db_conn.execute(builder.build(&stmt)).await?;
 
   Ok(())
 }
