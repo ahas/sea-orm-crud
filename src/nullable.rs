@@ -149,3 +149,12 @@ impl<T> From<Option<T>> for Nullable<T> {
     }
   }
 }
+
+impl<T> Nullable<T> {
+  pub fn has_value(&self) -> bool {
+    match self {
+      Self::Value(_) => true,
+      _ => false,
+    }
+  }
+}
