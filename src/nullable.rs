@@ -14,6 +14,29 @@ pub enum Nullable<T> {
   Undefined,
 }
 
+impl<T> Nullable<T> {
+  pub fn has_value(&self) -> bool {
+    matches!(self, Nullable::Value(_))
+  }
+
+  pub fn is_null(&self) -> bool {
+    matches!(self, Nullable::Null)
+  }
+
+  pub fn is_undefined(&self) -> bool {
+    matches!(self, Nullable::Undefined)
+  }
+}
+
+impl<T> Into<Option<T>> for Nullable<T> {
+  fn into(self) -> Option<T> {
+    match self {
+      Nullable::Value(v) => Some(v),
+      _ => None,
+    }
+  }
+}
+
 impl<T> Default for Nullable<T> {
   fn default() -> Self {
     Nullable::<T>::Undefined
