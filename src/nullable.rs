@@ -172,21 +172,3 @@ impl<T> From<Option<T>> for Nullable<T> {
     }
   }
 }
-
-impl<T> Into<Option<T>> for Nullable<T> {
-  fn into(self) -> Option<T> {
-      match self {
-        Self::Value(v) => Some(v),
-        _ => None,
-      }
-  }
-}
-
-impl<T> Nullable<T> {
-  pub fn has_value(&self) -> bool {
-    match self {
-      Self::Value(_) => true,
-      _ => false,
-    }
-  }
-}
